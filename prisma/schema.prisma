@@ -1,0 +1,94 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+model KodeReferensi {
+  kode_indikator    String  @id @db.VarChar(20)
+  nama_indikator    String  @db.VarChar(255)
+  parent_kode       String? @db.VarChar(20)
+  parentChild       String? @map("parent/child") @db.VarChar(20)
+  definisi          String? @db.Text
+  rumus_perhitungan String? @db.Text
+  klasifikasi       String? @db.VarChar(100)
+  satuan            String? @db.VarChar(50)
+  indikator_rpjpn   String? @db.VarChar(100)
+  indikator_rpjmn   String? @db.VarChar(100)
+  indikator_sdgs    String? @db.VarChar(100)
+  indikator_sipd    String? @db.VarChar(100)
+  tagging_rad       String? @db.VarChar(100)
+
+  @@map("kode_referensi")
+}
+
+model Sds {
+  kode_sds   String  @id @map("Kode SDS") @db.VarChar(20)
+  nama_data  String  @map("Nama Data") @db.VarChar(255)
+  konsep     String? @map("Konsep") @db.Text
+  definisi   String? @map("Definisi") @db.Text
+  penyajian  String? @map("Penyajian") @db.Text
+  isian      String? @map("Isian") @db.Text
+  ukuran     String? @map("Ukuran") @db.VarChar(100)
+  satuan     String? @map("Satuan") @db.VarChar(100)
+
+  @@map("standar_datas")
+}
+
+model data_prioritas {
+  id_ddp String @id @db.VarChar(10)
+
+  sumber_referensi       String? @db.VarChar(255)
+  indikator              String?
+  nama_data              String?
+  prioritas_pengembangan String? @db.VarChar(100)
+  jenis_data             String? @db.VarChar(100)
+  jenis_pengajuan        String? @db.VarChar(100)
+  indikator_variabel     String? @db.VarChar(100)
+  standar_data           String? @db.VarChar(50)
+  instansi_produsen      String?
+  unit_kerja_produsen    String?
+  definisi               String? @db.Text
+  satuan                 String? @db.VarChar(100)
+  klasifikasi_resiko     String? @db.VarChar(100)
+  klasifikasi_penyajian  String? @db.VarChar(100)
+  jadwal_pemutakhiran    String? @db.VarChar(100)
+  tag_rad                String? @db.VarChar(255)
+  butuh_dukungan_daerah  Boolean?
+  level_produsen         String?
+  catatan                String?
+  tahun_2025             Boolean?
+  tahun_2026             Boolean?
+  tahun_2027             Boolean?
+  tahun_2028             Boolean?
+  tahun_2029            Boolean?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("data_prioritas")
+}
+
+model Dssd {
+  id                    Int      @id @default(autoincrement())
+
+  kode_dssd             String   @db.VarChar(20)
+  uraian_dssd           String   @db.Text
+  satuan                String?  @db.VarChar(100)
+  definisi_operasional  String?  @db.Text
+  produsen_data         String?  @db.VarChar(255)
+
+  sheet_asal            String?  @db.VarChar(100)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("dssd")
+}

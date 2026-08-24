@@ -1,0 +1,32 @@
+-- CreateTable
+CREATE TABLE `data_ddp` (
+    `id_ddp` VARCHAR(10) NOT NULL,
+    `sumber_referensi` VARCHAR(255) NULL,
+    `indikator` VARCHAR(191) NULL,
+    `nama_data` VARCHAR(191) NULL,
+    `prioritas_pengembangan` VARCHAR(100) NULL,
+    `jenis_data` VARCHAR(100) NULL,
+    `jenis_pengajuan` VARCHAR(100) NULL,
+    `indikator_variabel` VARCHAR(100) NULL,
+    `standar_data` VARCHAR(50) NULL,
+    `instansi_produsen` VARCHAR(191) NULL,
+    `unit_kerja_produsen` VARCHAR(191) NULL,
+    `definisi` TEXT NULL,
+    `satuan` VARCHAR(100) NULL,
+    `klasifikasi_resiko` VARCHAR(100) NULL,
+    `klasifikasi_penyajian` VARCHAR(100) NULL,
+    `jadwal_pemutakhiran` VARCHAR(100) NULL,
+    `tag_rad` VARCHAR(255) NULL,
+    `butuh_dukungan_daerah` BOOLEAN NULL,
+    `level_produsen` VARCHAR(191) NULL,
+    `catatan` VARCHAR(191) NULL,
+    `tahun_2025` BOOLEAN NULL,
+    `tahun_2026` BOOLEAN NULL,
+    `tahun_2027` BOOLEAN NULL,
+    `tahun_2028` BOOLEAN NULL,
+    `tahun_2029` BOOLEAN NULL,
+    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updatedAt` DATETIME(3) NOT NULL,
+
+    UNIQUE INDEX `data_ddp_id_ddp_key`(`id_ddp`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
