@@ -1,14 +1,14 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-// Get a free hosted Postgres database in seconds: `npx create-db`
-
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "mysql"
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 model KodeReferensi {
@@ -58,7 +58,7 @@ model data_prioritas {
   definisi               String? @db.Text
   satuan                 String? @db.VarChar(100)
   klasifikasi_resiko     String? @db.VarChar(100)
-  klasifikasi_penyajian  String? @db.VarChar(100)
+  klasifikasi_penyajian   String? @db.VarChar(100)
   jadwal_pemutakhiran    String? @db.VarChar(100)
   tag_rad                String? @db.VarChar(255)
   butuh_dukungan_daerah  Boolean?
@@ -68,7 +68,7 @@ model data_prioritas {
   tahun_2026             Boolean?
   tahun_2027             Boolean?
   tahun_2028             Boolean?
-  tahun_2029            Boolean?
+  tahun_2029             Boolean?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
