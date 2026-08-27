@@ -9,54 +9,36 @@ const toText = (value: unknown) => {
   return String(value);
 };
 
-
 export async function GET(request: Request) {
-
   const { searchParams } = new URL(request.url);
-
   const q = searchParams.get("q")?.trim() ?? "";
-
-  // default tetap 8 data
-  const limit = Number(
-    searchParams.get("limit") ?? 8
-  );
-
+  const limitParam = searchParams.get("limit");
+  const limit = limitParam ? Number(limitParam) : 8;
 
   if (!q) {
     return NextResponse.json({
-      results: []
+      results: [],
     });
   }
 
-
   try {
-
-
-    const [
-      kodeReferensi,
-      dataPrioritas,
-      sds
-    ] = await Promise.all([
-
-
+    const [kodeReferensi, dataPrioritas, sds] = await Promise.all([
       // =====================
       // KODE REFERENSI
       // =====================
       prisma.kodeReferensi.findMany({
-
+        take: limit,
         where: {
           OR: [
-            { kode_indikator: { contains: q } },
-            { nama_indikator: { contains: q } },
-            { definisi: { contains: q } },
-            { satuan: { contains: q } },
-            { klasifikasi: { contains: q } },
-            { parent_kode: { contains: q } },
-            { parentChild: { contains: q } },
+            { kode_indikator: { contains: q, mode: "insensitive" } },
+            { nama_indikator: { contains: q, mode: "insensitive" } },
+            { definisi: { contains: q, mode: "insensitive" } },
+            { satuan: { contains: q, mode: "insensitive" } },
+            { klasifikasi: { contains: q, mode: "insensitive" } },
+            { parent_kode: { contains: q, mode: "insensitive" } },
+            { parentChild: { contains: q, mode: "insensitive" } },
           ],
         },
-
-
         select: {
           kode_indikator: true,
           nama_indikator: true,
@@ -72,41 +54,35 @@ export async function GET(request: Request) {
           indikator_sipd: true,
           tagging_rad: true,
         },
-
       }),
-
-
-
 
       // =====================
       // DATA PRIORITAS
       // =====================
       prisma.data_prioritas.findMany({
-
+        take: limit,
         where: {
           OR: [
-            { id_ddp: { contains: q } },
-            { sumber_referensi: { contains: q } },
-            { indikator: { contains: q } },
-            { nama_data: { contains: q } },
-            { jenis_data: { contains: q } },
-            { jenis_pengajuan: { contains: q } },
-            { indikator_variabel: { contains: q } },
-            { standar_data: { contains: q } },
-            { instansi_produsen: { contains: q } },
-            { unit_kerja_produsen: { contains: q } },
-            { definisi: { contains: q } },
-            { satuan: { contains: q } },
-            { klasifikasi_resiko: { contains: q } },
-            { klasifikasi_penyajian: { contains: q } },
-            { jadwal_pemutakhiran: { contains: q } },
-            { tag_rad: { contains: q } },
-            { level_produsen: { contains: q } },
-            { catatan: { contains: q } },
+            { id_ddp: { contains: q, mode: "insensitive" } },
+            { sumber_referensi: { contains: q, mode: "insensitive" } },
+            { indikator: { contains: q, mode: "insensitive" } },
+            { nama_data: { contains: q, mode: "insensitive" } },
+            { jenis_data: { contains: q, mode: "insensitive" } },
+            { jenis_pengajuan: { contains: q, mode: "insensitive" } },
+            { indikator_variabel: { contains: q, mode: "insensitive" } },
+            { standar_data: { contains: q, mode: "insensitive" } },
+            { instansi_produsen: { contains: q, mode: "insensitive" } },
+            { unit_kerja_produsen: { contains: q, mode: "insensitive" } },
+            { definisi: { contains: q, mode: "insensitive" } },
+            { satuan: { contains: q, mode: "insensitive" } },
+            { klasifikasi_resiko: { contains: q, mode: "insensitive" } },
+            { klasifikasi_penyajian: { contains: q, mode: "insensitive" } },
+            { jadwal_pemutakhiran: { contains: q, mode: "insensitive" } },
+            { tag_rad: { contains: q, mode: "insensitive" } },
+            { level_produsen: { contains: q, mode: "insensitive" } },
+            { catatan: { contains: q, mode: "insensitive" } },
           ],
         },
-
-
         select: {
           id_ddp: true,
           sumber_referensi: true,
@@ -134,32 +110,25 @@ export async function GET(request: Request) {
           tahun_2028: true,
           tahun_2029: true,
         },
-
       }),
 
-
-
-
-      // ==================
-      // ===
+      // =====================
       // SDS
       // =====================
       prisma.sds.findMany({
-
+        take: limit,
         where: {
           OR: [
-            { kode_sds: { contains: q } },
-            { nama_data: { contains: q } },
-            { konsep: { contains: q } },
-            { definisi: { contains: q } },
-            { penyajian: { contains: q } },
-            { isian: { contains: q } },
-            { ukuran: { contains: q } },
-            { satuan: { contains: q } },
+            { kode_sds: { contains: q, mode: "insensitive" } },
+            { nama_data: { contains: q, mode: "insensitive" } },
+            { konsep: { contains: q, mode: "insensitive" } },
+            { definisi: { contains: q, mode: "insensitive" } },
+            { penyajian: { contains: q, mode: "insensitive" } },
+            { isian: { contains: q, mode: "insensitive" } },
+            { ukuran: { contains: q, mode: "insensitive" } },
+            { satuan: { contains: q, mode: "insensitive" } },
           ],
         },
-
-
         select: {
           kode_sds: true,
           nama_data: true,
@@ -171,155 +140,109 @@ export async function GET(request: Request) {
           satuan: true,
         },
       }),
-
     ]);
 
-
-
     const results = [
-
-      ...kodeReferensi.map((item)=>({
-
-        id:item.kode_indikator,
-
-        kode:item.kode_indikator,
-
-        judul:item.nama_indikator,
-
-        deskripsi:item.definisi ?? "-",
-
-        kategori:"Kode Referensi",
-
-        detailTitle:"Detail Kode Referensi",
-
-        detail:[
+      ...kodeReferensi.map((item) => ({
+        id: item.kode_indikator,
+        kode: item.kode_indikator,
+        judul: item.nama_indikator,
+        deskripsi: item.definisi ?? "-",
+        kategori: "Kode Referensi",
+        detailTitle: "Detail Kode Referensi",
+        detail: [
           {
-            label:"Kode Indikator",
-            value:toText(item.kode_indikator)
+            label: "Kode Indikator",
+            value: toText(item.kode_indikator),
           },
           {
-            label:"Nama Indikator",
-            value:toText(item.nama_indikator)
+            label: "Nama Indikator",
+            value: toText(item.nama_indikator),
           },
           {
-            label:"Definisi",
-            value:toText(item.definisi)
+            label: "Definisi",
+            value: toText(item.definisi),
           },
           {
-            label:"Satuan",
-            value:toText(item.satuan)
+            label: "Satuan",
+            value: toText(item.satuan),
           },
         ],
-
       })),
 
-
-
-      ...dataPrioritas.map((item)=>({
-
-        id:item.id_ddp,
-
-        kode:item.id_ddp,
-
-        judul:item.nama_data ?? item.indikator ?? "-",
-
-        deskripsi:item.definisi ?? "-",
-
-        kategori:"Data Prioritas",
-
-        detailTitle:"Detail Data Prioritas",
-
-        detail:[
+      ...dataPrioritas.map((item) => ({
+        id: item.id_ddp,
+        kode: item.id_ddp,
+        judul: item.nama_data ?? item.indikator ?? "-",
+        deskripsi: item.definisi ?? "-",
+        kategori: "Data Prioritas",
+        detailTitle: "Detail Data Prioritas",
+        detail: [
           {
-            label:"ID DDP",
-            value:toText(item.id_ddp)
+            label: "ID DDP",
+            value: toText(item.id_ddp),
           },
           {
-            label:"Sumber Referensi",
-            value:toText(item.sumber_referensi)
+            label: "Sumber Referensi",
+            value: toText(item.sumber_referensi),
           },
           {
-            label:"Indikator",
-            value:toText(item.indikator)
+            label: "Indikator",
+            value: toText(item.indikator),
           },
           {
-            label:"Nama Data",
-            value:toText(item.nama_data)
+            label: "Nama Data",
+            value: toText(item.nama_data),
           },
           {
-            label:"Instansi Produsen Data",
-            value:toText(item.instansi_produsen)
+            label: "Instansi Produsen Data",
+            value: toText(item.instansi_produsen),
           },
           {
-            label:"Definisi",
-            value:toText(item.definisi)
+            label: "Definisi",
+            value: toText(item.definisi),
           },
         ],
-
       })),
 
-
-
-      ...sds.map((item)=>({
-
-        id:item.kode_sds,
-
-        kode:item.kode_sds,
-
-        judul:item.nama_data,
-
-        deskripsi:item.definisi ?? "-",
-
-        kategori:"Standar Data Statistik",
-
-        detailTitle:"Detail SDS",
-
-        detail:[
+      ...sds.map((item) => ({
+        id: item.kode_sds,
+        kode: item.kode_sds,
+        judul: item.nama_data,
+        deskripsi: item.definisi ?? "-",
+        kategori: "Standar Data Statistik",
+        detailTitle: "Detail SDS",
+        detail: [
           {
-            label:"Kode SDS",
-            value:toText(item.kode_sds)
+            label: "Kode SDS",
+            value: toText(item.kode_sds),
           },
           {
-            label:"Nama Data",
-            value:toText(item.nama_data)
+            label: "Nama Data",
+            value: toText(item.nama_data),
           },
           {
-            label:"Definisi",
-            value:toText(item.definisi)
+            label: "Definisi",
+            value: toText(item.definisi),
           },
         ],
-
       })),
-
     ];
 
-
-
     return NextResponse.json({
-      results
+      results,
     });
-
-
-
-  } catch(error){
-
-
-    console.error(
-      "GLOBAL SEARCH ERROR:",
-      error
-    );
-
+  } catch (error) {
+    console.error("GLOBAL SEARCH ERROR:", error);
 
     return NextResponse.json(
       {
-        results:[],
-        message:"Gagal melakukan pencarian."
+        results: [],
+        message: "Gagal melakukan pencarian.",
       },
       {
-        status:500
+        status: 500,
       }
     );
-
   }
-
 }
