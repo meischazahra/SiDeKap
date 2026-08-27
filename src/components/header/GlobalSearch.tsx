@@ -59,7 +59,7 @@ export default function GlobalSearch() {
         setIsLoading(true);
 
         const response = await fetch(
-          `/api/global-search?q=${encodeURIComponent(q)}`
+          `/api/global-search?q=${encodeURIComponent(q)}&limit=50`
         );
 
         const data = await response.json();
