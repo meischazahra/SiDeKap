@@ -1,53 +1,29 @@
 import "dotenv/config";
-import { PrismaMariaDb } from "@prisma/adapter-mariadb";
-
 import { PrismaClient } from "@prisma/client";
 import { parse } from "csv-parse/sync";
+import XLSX from "xlsx";
 import fs from "fs";
 import path from "path";
 
-const adapter = new PrismaMariaDb({
-  host: process.env.DATABASE_HOST,
-  user: process.env.DATABASE_USER,
-  password: process.env.DATABASE_PASSWORD,
-  database: process.env.DATABASE_NAME,
-  connectionLimit: 5,
-});
+const prisma = new PrismaClient();
 
-const prisma = new PrismaClient({ adapter });
-console.log(prisma);
+// Path File Data
+const kodeReferensiPath = path.join(__dirname, "data", "Kode Referensi Indikator Pembangunan 2.csv");
+const sdsPath = path.join(__dirname, "data", "Standar Data Statistik.csv");
+const dataPrioritasPath = path.join(__dirname, "data", "data_prioritas.csv");
+const excelPath = path.join(__dirname, "data", "Usulan Daftar Data.xlsx");
 
-const kodeReferensiPath = path.join(
-  __dirname,
-  "data",
-  "Kode Referensi Indikator Pembangunan 2.csv"
-);
-
-const sdsPath = path.join(
-  __dirname,
-  "data",
-  "Standar Data Statistik.csv"
-);
-
-const dataPrioritasPath = path.join(
-  __dirname,
-  "data",
-  "data_prioritas.csv"
-);
-
-function clean(value) {
+// Helper Clean Data
+function clean(value: any): string | null {
   if (value === undefined || value === null) return null;
-
   const result = String(value).trim();
-
   if (result === "" || result === "-") return null;
-
   return result;
 }
 
-function readCsv(filePath) {
+// Helper Read CSV
+function readCsv(filePath: string) {
   const file = fs.readFileSync(filePath, "utf8");
-
   return parse(file, {
     columns: true,
     skip_empty_lines: true,
@@ -56,11 +32,13 @@ function readCsv(filePath) {
   });
 }
 
+// 1. Seed Kode Referensi
 async function seedKodeReferensi() {
+  console.log("\n--- Memulai Seed Kode Referensi ---");
   const rows = readCsv(kodeReferensiPath);
 
   const data = rows
-    .map((row) => ({
+    .map((row: any) => ({
       kode_indikator: clean(row["Kode Indikator"]),
       nama_indikator: clean(row["Nama Indikator"]),
       parent_kode: clean(row["ID Parent"]),
@@ -75,12 +53,10 @@ async function seedKodeReferensi() {
       indikator_sipd: clean(row["Indikator SIPD"]),
       tagging_rad: clean(row["Tagging RAD"]),
     }))
-    .filter((item) => item.kode_indikator && item.nama_indikator);
+    .filter((item: any) => item.kode_indikator && item.nama_indikator);
 
   console.log("Data siap masuk KodeReferensi:", data.length);
-  console.log("Contoh data siap masuk:", data[0]);
 
-  // HAPUS DATA LAMA DULU
   const deleted = await prisma.kodeReferensi.deleteMany();
   console.log(`Data lama KodeReferensi terhapus: ${deleted.count} data`);
 
@@ -89,25 +65,23 @@ async function seedKodeReferensi() {
 
   for (let i = 0; i < data.length; i += batchSize) {
     const batch = data.slice(i, i + batchSize);
-
     const result = await prisma.kodeReferensi.createMany({
       data: batch,
       skipDuplicates: true,
     });
-
     totalMasuk += result.count;
-
-    console.log(`Batch ${i / batchSize + 1} berhasil: ${result.count} data`);
   }
 
   console.log(`KodeReferensi berhasil masuk total: ${totalMasuk} data`);
 }
 
+// 2. Seed Standar Data Statistik (SDS)
 async function seedSDS() {
+  console.log("\n--- Memulai Seed SDS ---");
   const rows = readCsv(sdsPath);
 
   const data = rows
-    .map((row) => ({
+    .map((row: any) => ({
       kode_sds: clean(row["Kode SDS"]),
       nama_data: clean(row["Nama Data"]),
       konsep: clean(row["Konsep"]),
@@ -117,21 +91,26 @@ async function seedSDS() {
       ukuran: clean(row["Ukuran"]),
       satuan: clean(row["Satuan"]),
     }))
-    .filter((item) => item.kode_sds && item.nama_data);
+    .filter((item: any) => item.kode_sds && item.nama_data);
 
-  await prisma.sds.createMany({
+  const deleted = await prisma.sds.deleteMany();
+  console.log(`Data lama SDS terhapus: ${deleted.count} data`);
+
+  const result = await prisma.sds.createMany({
     data,
     skipDuplicates: true,
   });
 
-  console.log(`SDS berhasil masuk: ${data.length} data`);
+  console.log(`SDS berhasil masuk: ${result.count} data`);
 }
 
+// 3. Seed Data Prioritas
 async function seedDataPrioritas() {
+  console.log("\n--- Memulai Seed Data Prioritas ---");
   const rows = readCsv(dataPrioritasPath);
 
   const data = rows
-    .map((row) => ({
+    .map((row: any) => ({
       id_ddp: clean(row["ID DDP"]),
       sumber_referensi: clean(row["Sumber Referensi"]),
       indikator: clean(row["Indikator"]),
@@ -148,7 +127,7 @@ async function seedDataPrioritas() {
       klasifikasi_penyajian: clean(row["Klasifikasi Penyajian"]),
       jadwal_pemutakhiran: clean(row["Jadwal Pemutakhiran"]),
       tag_rad: clean(row["Tag RAD"]),
-      butuh_dukungan_daerah: clean(row["Apakah membutuhkan dukungan Data Daerah?"])=== "Ya",
+      butuh_dukungan_daerah: clean(row["Apakah membutuhkan dukungan Data Daerah?"]) === "Ya",
       level_produsen: clean(row["Level Instansi Produsen Data Daerah"]),
       catatan: clean(row["Catatan kebutuhan dukungan Data Daerah"]),
       tahun_2025: clean(row["2025"]) === "Ya",
@@ -157,12 +136,10 @@ async function seedDataPrioritas() {
       tahun_2028: clean(row["2028"]) === "Ya",
       tahun_2029: clean(row["2029"]) === "Ya",
     }))
-    .filter((item) => item.id_ddp);
+    .filter((item: any) => item.id_ddp);
 
- console.log("Data siap masuk Data Prioritas:", data.length);
-  console.log("Contoh data siap masuk:", data[0]);
+  console.log("Data siap masuk Data Prioritas:", data.length);
 
-  // HAPUS DATA LAMA DULU
   const deleted = await prisma.data_prioritas.deleteMany();
   console.log(`Data lama Data Prioritas terhapus: ${deleted.count} data`);
 
@@ -171,29 +148,72 @@ async function seedDataPrioritas() {
 
   for (let i = 0; i < data.length; i += batchSize) {
     const batch = data.slice(i, i + batchSize);
-
     const result = await prisma.data_prioritas.createMany({
       data: batch,
       skipDuplicates: true,
     });
-
     totalMasuk += result.count;
-
-    console.log(`Batch ${i / batchSize + 1} berhasil: ${result.count} data`);
   }
 
   console.log(`Data Prioritas berhasil masuk total: ${totalMasuk} data`);
 }
 
+// 4. Seed DSSD (dari Excel)
+async function seedDssd() {
+  console.log("\n--- Memulai Seed DSSD ---");
 
+  await prisma.dssd.deleteMany();
+  console.log("Data DSSD lama berhasil dihapus");
+
+  const workbook = XLSX.readFile(excelPath);
+  console.log("Sheet ditemukan:", workbook.SheetNames.length);
+
+  let totalMasuk = 0;
+
+  for (const sheetName of workbook.SheetNames) {
+    console.log(`Proses sheet: ${sheetName}`);
+    const sheet = workbook.Sheets[sheetName];
+    const rows: any[] = XLSX.utils.sheet_to_json(sheet, { defval: "" });
+
+    const data = rows
+      .map((row) => ({
+        kode_dssd: clean(row["Kode DSSD"]),
+        uraian_dssd: clean(row["Uraian DSSD"]),
+        satuan: clean(row["Satuan"]),
+        definisi_operasional: clean(row["Definisi Operasional"]),
+        produsen_data: clean(row["Produsen Data"]),
+        sheet_asal: sheetName,
+      }))
+      .filter((item) => item.kode_dssd);
+
+    if (data.length === 0) {
+      console.log(`Tidak ada data valid di sheet ${sheetName}`);
+      continue;
+    }
+
+    const batchSize = 100;
+    for (let i = 0; i < data.length; i += batchSize) {
+      const batch = data.slice(i, i + batchSize);
+      const result = await prisma.dssd.createMany({
+        data: batch,
+      });
+      totalMasuk += result.count;
+    }
+  }
+
+  console.log(`TOTAL DSSD MASUK: ${totalMasuk}`);
+}
+
+// Main Execution
 async function main() {
-  console.log("Mulai seeding data...");
+  console.log("=== MEMULAI SELURUH PROSES SEEDING ===");
 
   await seedKodeReferensi();
   await seedSDS();
   await seedDataPrioritas();
+  await seedDssd();
 
-  console.log("Seeding selesai.");
+  console.log("\n=== SELURUH PROSES SEEDING SELESAI ===");
 }
 
 main()

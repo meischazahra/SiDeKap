@@ -1,22 +1,10 @@
 import "dotenv/config";
-import { PrismaMariaDb } from "@prisma/adapter-mariadb";
 import { PrismaClient } from "@prisma/client";
 import XLSX from "xlsx";
 import path from "path";
 
-
-const adapter = new PrismaMariaDb({
-  host: process.env.DATABASE_HOST,
-  user: process.env.DATABASE_USER,
-  password: process.env.DATABASE_PASSWORD,
-  database: process.env.DATABASE_NAME,
-  connectionLimit: 5,
-});
-
-
-const prisma = new PrismaClient({
-  adapter,
-});
+// Prisma otomatis membaca DATABASE_URL dari file .env (Supabase)
+const prisma = new PrismaClient();
 
 
 const excelPath = path.join(

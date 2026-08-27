@@ -22,7 +22,7 @@ export async function GET(request: Request) {
   }
 
   try {
-    const [kodeReferensi, dataPrioritas, sds] = await Promise.all([
+    const [kodeReferensi, dataPrioritas, sds, dssd] = await Promise.all([
       // =====================
       // KODE REFERENSI
       // =====================
@@ -140,6 +140,27 @@ export async function GET(request: Request) {
           satuan: true,
         },
       }),
+
+      // =====================
+      // KODE DSSD (Sesuaikan nama tabel prisma jika berbeda, misal prisma.dssd)
+      // =====================
+      prisma.dssd.findMany({
+        take: limit,
+        where: {
+          OR: [
+            { kode_dssd: { contains: q, mode: "insensitive" } },
+            { uraian_dssd: { contains: q, mode: "insensitive" } },
+            { satuan: { contains: q, mode: "insensitive" } },
+            { definisi_operasional: { contains: q, mode: "insensitive" } },
+          ],
+        },
+        select: {
+          kode_dssd: true,
+          uraian_dssd: true,
+          satuan: true,
+          definisi_operasional: true,
+        },
+      }),
     ]);
 
     const results = [
@@ -227,7 +248,35 @@ export async function GET(request: Request) {
           },
         ],
       })),
-    ];
+
+// ... di dalam endpoint /api/global-search kamu
+
+      ...dssd.map((item) => ({
+        id: item.kode_dssd,
+        kode: item.kode_dssd,
+        judul: item.uraian_dssd,
+        deskripsi: item.definisi_operasional ?? "-",
+        kategori: "Kode DSSD", // <-- Pastikan string ini sama persis dengan orderedCategories di frontend
+        detailTitle: "Detail Kode DSSD",
+        detail: [
+          {
+            label: "Kode DSSD",
+            value: toText(item.kode_dssd),
+          },
+          {
+            label: "Uraian DSSD",
+            value: toText(item.uraian_dssd),
+          },
+          {
+            label: "Satuan",
+            value: toText(item.satuan),
+          },
+          {
+            label: "Definisi Operasional",
+            value: toText(item.definisi_operasional),
+          },
+        ],
+      })),
 
     return NextResponse.json({
       results,
