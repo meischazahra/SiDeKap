@@ -142,7 +142,7 @@ export async function GET(request: Request) {
       }),
 
       // =====================
-      // KODE DSSD (Sesuaikan nama tabel prisma jika berbeda, misal prisma.dssd)
+      // KODE DSSD
       // =====================
       prisma.dssd.findMany({
         take: limit,
@@ -172,22 +172,10 @@ export async function GET(request: Request) {
         kategori: "Kode Referensi",
         detailTitle: "Detail Kode Referensi",
         detail: [
-          {
-            label: "Kode Indikator",
-            value: toText(item.kode_indikator),
-          },
-          {
-            label: "Nama Indikator",
-            value: toText(item.nama_indikator),
-          },
-          {
-            label: "Definisi",
-            value: toText(item.definisi),
-          },
-          {
-            label: "Satuan",
-            value: toText(item.satuan),
-          },
+          { label: "Kode Indikator", value: toText(item.kode_indikator) },
+          { label: "Nama Indikator", value: toText(item.nama_indikator) },
+          { label: "Definisi", value: toText(item.definisi) },
+          { label: "Satuan", value: toText(item.satuan) },
         ],
       })),
 
@@ -199,30 +187,12 @@ export async function GET(request: Request) {
         kategori: "Data Prioritas",
         detailTitle: "Detail Data Prioritas",
         detail: [
-          {
-            label: "ID DDP",
-            value: toText(item.id_ddp),
-          },
-          {
-            label: "Sumber Referensi",
-            value: toText(item.sumber_referensi),
-          },
-          {
-            label: "Indikator",
-            value: toText(item.indikator),
-          },
-          {
-            label: "Nama Data",
-            value: toText(item.nama_data),
-          },
-          {
-            label: "Instansi Produsen Data",
-            value: toText(item.instansi_produsen),
-          },
-          {
-            label: "Definisi",
-            value: toText(item.definisi),
-          },
+          { label: "ID DDP", value: toText(item.id_ddp) },
+          { label: "Sumber Referensi", value: toText(item.sumber_referensi) },
+          { label: "Indikator", value: toText(item.indikator) },
+          { label: "Nama Data", value: toText(item.nama_data) },
+          { label: "Instansi Produsen Data", value: toText(item.instansi_produsen) },
+          { label: "Definisi", value: toText(item.definisi) },
         ],
       })),
 
@@ -234,49 +204,27 @@ export async function GET(request: Request) {
         kategori: "Standar Data Statistik",
         detailTitle: "Detail SDS",
         detail: [
-          {
-            label: "Kode SDS",
-            value: toText(item.kode_sds),
-          },
-          {
-            label: "Nama Data",
-            value: toText(item.nama_data),
-          },
-          {
-            label: "Definisi",
-            value: toText(item.definisi),
-          },
+          { label: "Kode SDS", value: toText(item.kode_sds) },
+          { label: "Nama Data", value: toText(item.nama_data) },
+          { label: "Definisi", value: toText(item.definisi) },
         ],
       })),
-
-// ... di dalam endpoint /api/global-search kamu
 
       ...dssd.map((item) => ({
         id: item.kode_dssd,
         kode: item.kode_dssd,
         judul: item.uraian_dssd,
         deskripsi: item.definisi_operasional ?? "-",
-        kategori: "Kode DSSD", // <-- Pastikan string ini sama persis dengan orderedCategories di frontend
+        kategori: "Kode DSSD",
         detailTitle: "Detail Kode DSSD",
         detail: [
-          {
-            label: "Kode DSSD",
-            value: toText(item.kode_dssd),
-          },
-          {
-            label: "Uraian DSSD",
-            value: toText(item.uraian_dssd),
-          },
-          {
-            label: "Satuan",
-            value: toText(item.satuan),
-          },
-          {
-            label: "Definisi Operasional",
-            value: toText(item.definisi_operasional),
-          },
+          { label: "Kode DSSD", value: toText(item.kode_dssd) },
+          { label: "Uraian DSSD", value: toText(item.uraian_dssd) },
+          { label: "Satuan", value: toText(item.satuan) },
+          { label: "Definisi Operasional", value: toText(item.definisi_operasional) },
         ],
-      })),
+      })), // <-- Kurung tutup objek map DAN kurung tutup array map sudah lengkap di sini
+    ];
 
     return NextResponse.json({
       results,
