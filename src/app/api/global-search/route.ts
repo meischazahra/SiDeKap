@@ -162,7 +162,8 @@ export async function GET(request: Request) {
         },
       }),
     ]);
-
+console.log("JUMLAH DSSD DITEMUKAN:", dssd.length);
+    console.log("ISI DATA DSSD:", dssd);
     const results = [
       ...kodeReferensi.map((item) => ({
         id: item.kode_indikator,
