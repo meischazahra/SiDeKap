@@ -21,7 +21,7 @@ const sumberData = [
   {
     title: "Data Prioritas",
     description: "Daftar data pengembangan",
-    href: "https://data.go.id/",
+    href: "https://perencanaan.data.go.id/renduk",
   },
   {
     title: "Kode DSSD",
