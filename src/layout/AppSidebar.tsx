@@ -329,7 +329,7 @@ const AppSidebar: React.FC = () => {
             <>
               <Image
                 className="dark:hidden"
-                src="/images/logo/logo bps kapuas.png"
+                src="/images/logo/logo hidden dark.png"
                 alt="Logo BPS Kabupaten Kapuas"
                 width={250}
                 height={700}
@@ -337,7 +337,7 @@ const AppSidebar: React.FC = () => {
 
               <Image
                 className="hidden dark:block"
-                src="/images/logo/logo bps kapuas bm.png"
+                src="/images/logo/logo hidden.png"
                 alt="Logo"
                 width={250}
                 height={700}
