@@ -329,7 +329,7 @@ const AppSidebar: React.FC = () => {
             <>
               <Image
                 className="dark:hidden"
-                src="/images/logo/logo hidden dark.png"
+                src="/images/logo/logo bps kapuas.png"
                 alt="Logo BPS Kabupaten Kapuas"
                 width={250}
                 height={700}
@@ -337,7 +337,7 @@ const AppSidebar: React.FC = () => {
 
               <Image
                 className="hidden dark:block"
-                src="/images/logo/logo hidden.png"
+                src="/images/logo/logo bps kapuas bm.png"
                 alt="Logo"
                 width={250}
                 height={700}
@@ -345,7 +345,7 @@ const AppSidebar: React.FC = () => {
             </>
           ) : (
             <Image
-              src="/tailadmin-nextjs/images/logo/logo bps kapuas.svg"
+              src="/tailadmin-nextjs/images/logo/logo hidden.svg"
               alt="Logo"
               width={32}
               height={32}
