@@ -7,7 +7,7 @@ type KodeReferensi = {
   kode_indikator: string;
   nama_indikator: string;
   definisi: string;
-  satuan: string;
+  rumus_perhitungan: string;
   klasifikasi: string;
   parent_kode: string;
   parentChild: string;
@@ -129,8 +129,8 @@ function KodeReferensiDetailModal({
           />
 
           <DetailSection
-            title="Satuan"
-            content={item.satuan}
+            title="Rumus Perhitungan"
+            content={item.rumus_perhitungan}
           />
 
           <DetailSection
@@ -139,14 +139,35 @@ function KodeReferensiDetailModal({
           />
 
           <DetailSection
-            title="Parent Kode"
-            content={item.parent_kode}
+            title="Satuan"
+            content={item.satuan}
           />
 
           <DetailSection
-            title="Parent / Child"
-            content={item.parentChild}
+            title="Indikator RPJPN"
+            content={item.indikator_rpjpn}
           />
+
+          <DetailSection
+            title="Indikator RPJMN"
+            content={item.indikator_rpjmn}
+          />
+
+          <DetailSection
+            title="Indikator SDGS"
+            content={item.indikator_sdgs}
+          />
+
+          <DetailSection
+            title="Indikator SIPD"
+            content={item.indikator_sipd}
+          />
+
+          <DetailSection
+            title="Tagging RAD"
+            content={item.tagging_rad}
+          />
+
         </div>
 
         {/* FOOTER */}
