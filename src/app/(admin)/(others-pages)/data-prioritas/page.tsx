@@ -32,12 +32,7 @@ export default async function DataPrioritasPage() {
       tag_rad: true,
       butuh_dukungan_daerah: true,
       level_produsen: true,
-      catatan: true,
-      tahun_2025: true,
-      tahun_2026: true,
-      tahun_2027: true,
-      tahun_2028: true,
-      tahun_2029: true,
+      catatan: true
     },
     orderBy: {
       id_ddp: "asc",
@@ -63,12 +58,7 @@ export default async function DataPrioritasPage() {
     tag_rad: item.tag_rad ?? "-",
     butuh_dukungan_daerah: item.butuh_dukungan_daerah ?? false,
     level_produsen: item.level_produsen ?? "-",
-    catatan: item.catatan ?? "-",
-    tahun_2025: item.tahun_2025 ?? false,
-    tahun_2026: item.tahun_2026 ?? false,
-    tahun_2027: item.tahun_2027 ?? false,
-    tahun_2028: item.tahun_2028 ?? false,
-    tahun_2029: item.tahun_2029 ?? false,
+    catatan: item.catatan ?? "-"
   }));
 
   return (

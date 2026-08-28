@@ -23,11 +23,6 @@ type DataPrioritas = {
   butuh_dukungan_daerah: boolean;
   level_produsen: string;
   catatan: string;
-  tahun_2025: boolean;
-  tahun_2026: boolean;
-  tahun_2027: boolean;
-  tahun_2028: boolean;
-  tahun_2029: boolean;
 };
 
 type Props = {
@@ -227,40 +222,6 @@ function DetailDataPrioritasModal({
             title="Catatan Kebutuhan Dukungan Data Daerah"
             content={item.catatan}
           />
-
-          {/* PERIODE PENGEMBANGAN */}
-          <div className="mt-5">
-            <h3 className="mb-3 text-base font-semibold text-gray-900 dark:text-white">
-              Periode Pengembangan
-            </h3>
-
-            <div className="grid grid-cols-2 gap-3 sm:grid-cols-5">
-              <YearBadge
-                year="2025"
-                value={item.tahun_2025}
-              />
-
-              <YearBadge
-                year="2026"
-                value={item.tahun_2026}
-              />
-
-              <YearBadge
-                year="2027"
-                value={item.tahun_2027}
-              />
-
-              <YearBadge
-                year="2028"
-                value={item.tahun_2028}
-              />
-
-              <YearBadge
-                year="2029"
-                value={item.tahun_2029}
-              />
-            </div>
-          </div>
         </div>
 
         {/* FOOTER */}

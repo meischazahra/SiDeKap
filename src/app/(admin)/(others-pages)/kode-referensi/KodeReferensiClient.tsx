@@ -9,8 +9,12 @@ type KodeReferensi = {
   definisi: string;
   rumus_perhitungan: string;
   klasifikasi: string;
-  parent_kode: string;
-  parentChild: string;
+  satuan: string;
+  indikator_rpjpn: string;
+  indikator_rpjmn: string;
+  indikator_sdgs: string;
+  indikator_sipd: string;
+  tagging_rad: string
 };
 
 type Props = {
