@@ -22,8 +22,12 @@ export default async function KodeReferensiPage() {
       definisi: true,
       satuan: true,
       klasifikasi: true,
-      parent_kode: true,
-      parentChild: true,
+      rumus_perhitungan : true,
+      indikator_rpjpn: true,
+      indikator_rpjmn: true,
+      indikator_sdgs: true,
+      indikator_sipd: true,
+      tagging_rad: true
     },
   });
   console.log("DATA DARI DATABASE:", data);
@@ -34,8 +38,12 @@ export default async function KodeReferensiPage() {
     definisi: item.definisi ?? "-",
     satuan: item.satuan ?? "-",
     klasifikasi: item.klasifikasi ?? "-",
-    parent_kode: item.parent_kode ?? "-",
-    parentChild: item.parentChild ?? "-",
+    rumus_perhitungan: item.rumus_perhitungan ?? "-",
+    indikator_rpjpn: item.indikator_rpjpn ?? "-",
+    indikator_rpjmn: item.indikator_rpjmn ?? "-",
+    indikator_sdgs: item.indikator_sdgs ?? "-",
+    indikator_sipd: item.indikator_sipd ?? "-",
+    tagging_rad: item.tagging_rad ?? "-"
   }));
 
 return (
