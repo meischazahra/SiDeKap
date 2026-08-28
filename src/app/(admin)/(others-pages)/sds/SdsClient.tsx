@@ -5,8 +5,8 @@ import GenericTable from "@/components/tables/GenericTable";
 
 type Sds = {
   kode_sds: string;
-  nama_data: string;
-  definisi: string;
+  konsep: string;
+  penyajian: string;
 };
 
 type Props = {
@@ -105,12 +105,37 @@ function SdsDetailModal({
 
           <DetailSection
             title="Nama Data"
-            content={item.nama_data}
+            content={item.konsep}
+          />
+
+          <DetailSection
+            title="Konsep"
+            content={item.konsep}
           />
 
           <DetailSection
             title="Definisi"
-            content={item.definisi}
+            content={item.penyajian}
+          />
+
+          <DetailSection
+            title="Penyajian"
+            content={item.penyajian}
+          />
+
+          <DetailSection
+            title="Isian"
+            content={item.isian}
+          />
+
+          <DetailSection
+            title="Ukuran"
+            content={item.ukuran}
+          />
+
+          <DetailSection
+            title="Satuan"
+          content={item.satuan}
           />
         </div>
 
