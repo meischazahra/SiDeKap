@@ -345,7 +345,7 @@ const AppSidebar: React.FC = () => {
             </>
           ) : (
             <Image
-              src="/tailadmin-nextjs/images/logo/logo hidden.png"
+              src="/images/images/logo/logo hidden.png"
               alt="Logo"
               width={32}
               height={32}
