@@ -5,8 +5,13 @@ import GenericTable from "@/components/tables/GenericTable";
 
 type Sds = {
   kode_sds: string;
-  konsep: string;
-  penyajian: string;
+  nama_data: string;
+  konsep: string | null;
+  definisi: string | null;
+  penyajian: string | null;
+  isian: string | null;
+  ukuran: string | null;
+  satuan: string | null;
 };
 
 type Props = {
