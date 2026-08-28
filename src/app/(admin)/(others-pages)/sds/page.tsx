@@ -17,14 +17,14 @@ export default async function SdsPage() {
       kode_sds: "asc",
     },
     select: {
-      kode_sds: string;
-      nama_data: string;
-      konsep: string | null;
-      definisi: string | null;
-      penyajian: string | null;
-      isian: string | null;
-      ukuran: string | null;
-      satuan: string | null;
+      kode_sds: true,
+      nama_data: true,
+      konsep: true,
+      definisi: true,
+      penyajian: true,
+      isian: true,
+      ukuran: true,
+      satuan: true
     },
   });
 
