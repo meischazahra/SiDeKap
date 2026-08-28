@@ -105,7 +105,7 @@ function SdsDetailModal({
 
           <DetailSection
             title="Nama Data"
-            content={item.konsep}
+            content={item.nama_data}
           />
 
           <DetailSection
@@ -115,7 +115,7 @@ function SdsDetailModal({
 
           <DetailSection
             title="Definisi"
-            content={item.penyajian}
+            content={item.definisi}
           />
 
           <DetailSection
