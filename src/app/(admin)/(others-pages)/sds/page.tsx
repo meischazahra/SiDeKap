@@ -31,7 +31,12 @@ export default async function SdsPage() {
   const mappedData = data.map((item) => ({
     kode_sds: item.kode_sds ?? "",
     nama_data: item.nama_data ?? "",
-    definisi: item.definisi ?? "-",
+    konsep: item.konsep ?? "",
+    definisi: item.definisi ?? "",
+    penyajian: item.penyajian ?? "",
+    isian: item.isian ?? "",
+    ukuran: item.ukuran ?? "",
+    satuan: item.satuan ?? ""
   }));
 
   return (
