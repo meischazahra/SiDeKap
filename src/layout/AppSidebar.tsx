@@ -46,7 +46,7 @@ const navItems: NavItem[] = [
   {
     name: "Kode Referensi Indikator Pembangunan",
     // Gunakan hasil import di atas
-    icon: <img src={tableIconPng.src} alt="Table Icon" className="w-5 h-5 object-contain" />,
+    icon: <img src={tableIconPng.src} alt="Table Icon" className="w-6 h-6 object-contain" />,
     path: "/kode-referensi",
   },
   {
