@@ -47,10 +47,14 @@ const navItems: NavItem[] = [
   },
 {
   icon: (
-      <span className="flex h-5 w-5 items-center justify-center">
-        <img src={tableIconPng.src} alt="Table Icon" className="h-full w-full object-contain" />
-      </span>
-    ),
+    <span className="flex h-5 w-5 items-center justify-center">
+      <img 
+        src={tableIconPng.src} 
+        alt="Table Icon" 
+        className="h-full w-full object-contain opacity-80 dark:invert" 
+      />
+    </span>
+  ),
   name: "Kode Referensi Indikator Pembangunan",
   path: "/kode-referensi",
 },
