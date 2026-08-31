@@ -59,11 +59,15 @@ const navItems: NavItem[] = [
   path: "/kode-referensi",
 },
   {
-      icon: (
-      <span className="flex h-5 w-5 items-center justify-center">
-        <img src={tableIconPng1.src} alt="Table Icon" className="h-full w-full object-contain" />
-      </span>
-    ),
+  icon: (
+    <span className="flex h-5 w-5 items-center justify-center">
+      <img 
+        src={tableIconPng1.src} 
+        alt="Table Icon" 
+        className="h-full w-full object-contain opacity-80 dark:invert" 
+      />
+    </span>
+  ),
     name: "Data prioritas",
     path: "/data-prioritas",
   },
@@ -71,7 +75,11 @@ const navItems: NavItem[] = [
     name: "Kode DSSD",
     icon: (
       <span className="flex h-5 w-5 items-center justify-center">
-        <img src={tableIconPng2.src} alt="Table Icon" className="h-full w-full object-contain" />
+        <img 
+          src={tableIconPng2.src} 
+          alt="Table Icon" 
+          className="h-full w-full object-contain opacity-80 dark:invert" 
+        />
       </span>
     ),
     path: "/kode-dssd",
