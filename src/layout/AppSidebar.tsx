@@ -44,8 +44,12 @@ const navItems: NavItem[] = [
     path: "/sds",
   },
 {
+  icon: (
+      <span className="flex h-6 w-6 items-center justify-center">
+        <img src={tableIconPng.src} alt="Table Icon" className="h-full w-full object-contain" />
+      </span>
+    ),
   name: "Kode Referensi Indikator Pembangunan",
-  icon: <img src={tableIconPng.src} alt="Table Icon" className="w-6 h-6 inline-block align-middle object-contain" />,
   path: "/kode-referensi",
 },
   {
