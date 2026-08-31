@@ -20,7 +20,7 @@ const sumberData = [
   },
   {
     title: "Data Prioritas",
-    description: "Daftar data pengembangan",
+    description: "Data Prioritas Jangka Menengah",
     href: "https://perencanaan.data.go.id/renduk",
   },
   {

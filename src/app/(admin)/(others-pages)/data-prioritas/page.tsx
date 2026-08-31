@@ -66,7 +66,7 @@ export default async function DataPrioritasPage() {
       <PageBreadcrumb pageTitle="Data Prioritas" />
 
       <div className="space-y-6">
-        <ComponentCard title="Data Prioritas">
+        <ComponentCard title="Data Prioritas Jangka Menengah 2025-2029" description="Berisi daftar data prioritas jangka menengah yang digunakan dalam sistem.">
           <DataPrioritasClient data={mappedData} />
         </ComponentCard>
       </div>
