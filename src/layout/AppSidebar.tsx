@@ -72,7 +72,7 @@ const navItems: NavItem[] = [
     path: "/data-prioritas",
   },
   {
-    name: "Kode DSSD",
+    name: "Data Statistik Sektoral Daerah",
     icon: (
       <span className="flex h-5 w-5 items-center justify-center">
         <img 

@@ -48,10 +48,10 @@ export default async function KodeReferensiPage() {
 
 return (
     <div>
-      <PageBreadcrumb pageTitle="Kode Referensi" />
+      <PageBreadcrumb pageTitle="Kode Referensi Indikator Pembangunan" />
 
       <div className="space-y-6">
-        <ComponentCard title="Kode Referensi">
+        <ComponentCard title="Kode Referensi Indikator Pembangunan" description="Berisi daftar kode referensi indikator pembangunan yang digunakan dalam sistem.">
           <KodeReferensiClient data={mappedData} />
         </ComponentCard>
       </div>
