@@ -43,7 +43,7 @@ const navItems: NavItem[] = [
   },
   {
     name: "Kode Referensi Indikator Pembangunan",
-    icon: <TableIcon />,
+    icon: <img src="/icons/table.png" alt="Table Icon" className="w-5 h-5" />,
     path: "/kode-referensi",
   },
   {
