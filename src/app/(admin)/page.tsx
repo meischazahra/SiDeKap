@@ -25,7 +25,7 @@ const sumberData = [
   },
   {
     title: "Kode DSSD",
-    description: "Kode data sektoral",
+    description: "Data Statistik Sektoral Daerah",
     href: "https://sipd.go.id/",
   },
 ];
