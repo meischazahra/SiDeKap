@@ -162,8 +162,7 @@ export async function GET(request: Request) {
         },
       }),
     ]);
-console.log("JUMLAH DSSD DITEMUKAN:", dssd.length);
-    console.log("ISI DATA DSSD:", dssd);
+
     const results = [
       ...kodeReferensi.map((item) => ({
         id: item.kode_indikator,
@@ -199,8 +198,21 @@ console.log("JUMLAH DSSD DITEMUKAN:", dssd.length);
           { label: "Sumber Referensi", value: toText(item.sumber_referensi) },
           { label: "Indikator", value: toText(item.indikator) },
           { label: "Nama Data", value: toText(item.nama_data) },
+          { label: "Jenis Data", value: toText(item.jenis_data) },
+          { label: "Jenis Pengajuan", value: toText(item.jenis_pengajuan) },
+          { label: "Indikator Variabel", value: toText(item.indikator_variabel) },
+          { label: "Standar Data", value: toText(item.standar_data) },
           { label: "Instansi Produsen Data", value: toText(item.instansi_produsen) },
+          { label: "Unit Kerja Produsen", value: toText(item.unit_kerja_produsen) },
           { label: "Definisi", value: toText(item.definisi) },
+          { label: "Satuan", value: toText(item.satuan) },
+          { label: "Klasifikasi Resiko", value: toText(item.klasifikasi_resiko) },
+          { label: "Klasifikasi Penyajian", value: toText(item.klasifikasi_penyajian) },  
+          { label: "Jadwal Pemutakhiran", value: toText(item.jadwal_pemutakhiran) },
+          { label: "Tag RAD", value: toText(item.tag_rad) },
+          { label: "Butuh Dukungan Daerah", value: toText(item.butuh_dukungan_daerah) },
+          { label: "Level Produsen", value: toText(item.level_produsen) },
+          { label: "Catatan", value: toText(item.catatan) },
         ],
       })),
 
@@ -214,7 +226,12 @@ console.log("JUMLAH DSSD DITEMUKAN:", dssd.length);
         detail: [
           { label: "Kode SDS", value: toText(item.kode_sds) },
           { label: "Nama Data", value: toText(item.nama_data) },
+          { label: "Konsep", value: toText(item.konsep) },
           { label: "Definisi", value: toText(item.definisi) },
+          { label: "Penyajian", value: toText(item.penyajian) },
+          { label: "Isian", value: toText(item.isian) },
+          { label: "Ukuran", value: toText(item.ukuran) },
+          { label: "Satuan", value: toText(item.satuan) },
         ],
       })),
 
@@ -228,6 +245,8 @@ console.log("JUMLAH DSSD DITEMUKAN:", dssd.length);
         detail: [
           { label: "Kode DSSD", value: toText(item.kode_dssd) },
           { label: "Uraian DSSD", value: toText(item.uraian_dssd) },
+          { label: "Produsen Data", value: toText(item.produsen_data) },
+          { label: "Urusan", value: toText(item.urusan) },
           { label: "Satuan", value: toText(item.satuan) },
           { label: "Definisi Operasional", value: toText(item.definisi_operasional) },
         ],
