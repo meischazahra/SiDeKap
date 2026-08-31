@@ -19,6 +19,8 @@ import {
   TableIcon,
 } from "../icons/index";
 import tableIconPng from "../icons/table.png";
+import tableIconPng1 from "../icons/table (1).png";
+import tableIconPng2 from "../icons/table (2).png";
 
 type NavItem = {
   name: string;
@@ -45,7 +47,7 @@ const navItems: NavItem[] = [
   },
 {
   icon: (
-      <span className="flex h-6 w-6 items-center justify-center">
+      <span className="flex h-5 w-5 items-center justify-center">
         <img src={tableIconPng.src} alt="Table Icon" className="h-full w-full object-contain" />
       </span>
     ),
@@ -53,13 +55,21 @@ const navItems: NavItem[] = [
   path: "/kode-referensi",
 },
   {
-    icon: <TableIcon />,
+      icon: (
+      <span className="flex h-5 w-5 items-center justify-center">
+        <img src={tableIconPng1.src} alt="Table Icon" className="h-full w-full object-contain" />
+      </span>
+    ),
     name: "Data prioritas",
     path: "/data-prioritas",
   },
   {
     name: "Kode DSSD",
-    icon: <TableIcon />,
+    icon: (
+      <span className="flex h-5 w-5 items-center justify-center">
+        <img src={tableIconPng2.src} alt="Table Icon" className="h-full w-full object-contain" />
+      </span>
+    ),
     path: "/kode-dssd",
   },
 ];
