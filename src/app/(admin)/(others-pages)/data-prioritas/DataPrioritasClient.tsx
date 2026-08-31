@@ -219,7 +219,7 @@ function DetailDataPrioritasModal({
           />
 
           <DetailSection
-            title="Catatan Kebutuhan Dukungan Data Daerah"
+            title="Catatan"
             content={item.catatan}
           />
         </div>
