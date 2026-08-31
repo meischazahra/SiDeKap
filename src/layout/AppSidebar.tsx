@@ -11,12 +11,14 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useSidebar } from "../context/SidebarContext";
 
+
 import {
   CalenderIcon,
   GridIcon,
   ListIcon,
   TableIcon,
 } from "../icons/index";
+import tableIconPng from "../icons/table.png";
 
 type NavItem = {
   name: string;
@@ -43,7 +45,8 @@ const navItems: NavItem[] = [
   },
   {
     name: "Kode Referensi Indikator Pembangunan",
-    icon: <img src="/icons/table.png" alt="Table Icon" className="w-5 h-5" />,
+    // Gunakan hasil import di atas
+    icon: <img src={tableIconPng.src} alt="Table Icon" className="w-5 h-5 object-contain" />,
     path: "/kode-referensi",
   },
   {
