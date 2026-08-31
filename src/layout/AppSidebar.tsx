@@ -37,7 +37,7 @@ const navItems: NavItem[] = [
     path: "/",
   },
   {
-    icon: <CalenderIcon />,
+    icon: <TableIcon />,
     name: "Standar Data Statistik",
     path: "/sds",
   },
@@ -47,13 +47,13 @@ const navItems: NavItem[] = [
     path: "/kode-referensi",
   },
   {
-    icon: <ListIcon />,
+    icon: <TableIcon />,
     name: "Data prioritas",
     path: "/data-prioritas",
   },
   {
     name: "Kode DSSD",
-    icon: <ListIcon />,
+    icon: <TableIcon />,
     path: "/kode-dssd",
   },
 ];
