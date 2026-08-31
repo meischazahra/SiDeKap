@@ -43,12 +43,11 @@ const navItems: NavItem[] = [
     name: "Standar Data Statistik",
     path: "/sds",
   },
-  {
-    name: "Kode Referensi Indikator Pembangunan",
-    // Gunakan hasil import di atas
-    icon: <img src={tableIconPng.src} alt="Table Icon" className="w-6 h-6 object-contain" />,
-    path: "/kode-referensi",
-  },
+{
+  name: "Kode Referensi Indikator Pembangunan",
+  icon: <img src={tableIconPng.src} alt="Table Icon" className="w-6 h-6 inline-block align-middle object-contain" />,
+  path: "/kode-referensi",
+},
   {
     icon: <TableIcon />,
     name: "Data prioritas",
