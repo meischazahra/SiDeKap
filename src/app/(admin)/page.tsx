@@ -100,7 +100,7 @@ export default function Ecommerce() {
               lg:text-3xl
             "
           >
-            Pencarian Data Terpadu
+            Pencarian Kode Data Terpadu
           </h1>
 
           <p
@@ -113,7 +113,7 @@ export default function Ecommerce() {
               dark:text-gray-400
             "
           >
-            Cari data dari Standar Data Statistik, Kode Referensi Indikator,
+            Cari kodedata dari Standar Data Statistik, Kode Referensi Indikator,
             Data Prioritas, dan Kode DSSD dalam satu tempat.
           </p>
         </div>
