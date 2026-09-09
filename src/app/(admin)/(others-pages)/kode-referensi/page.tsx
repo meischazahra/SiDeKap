@@ -51,7 +51,7 @@ return (
       <PageBreadcrumb pageTitle="Kode Referensi Indikator Pembangunan" />
 
       <div className="space-y-6">
-        <ComponentCard title="Kode Referensi Indikator Pembangunan" description="Berisi daftar kode referensi indikator pembangunan yang digunakan dalam sistem.">
+        <ComponentCard title="Dasar Hukum : Keputusan Menteri Perencanaan Pembangunan Nasional/Kepala Badan Perencanaan Pembangunan Nasional Nomor Kep. 26A/M.PPN/HK/05/2025 tentang Kode Referensi Indikator Pembangunan" description="Berisi daftar kode referensi indikator pembangunan yang digunakan dalam sistem.">
           <KodeReferensiClient data={mappedData} />
         </ComponentCard>
       </div>

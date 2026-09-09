@@ -66,7 +66,7 @@ export default async function DataPrioritasPage() {
       <PageBreadcrumb pageTitle="Data Prioritas" />
 
       <div className="space-y-6">
-        <ComponentCard title="Data Prioritas Jangka Menengah 2025-2029" description="Berisi daftar data prioritas jangka menengah yang digunakan dalam sistem.">
+        <ComponentCard title="Dasar Hukum :Keputusan Menteri PPN/Kepala Bappenas Nomor 108/M.PPN/HK/12/2025 tanggal 24 Desember 2025 tentang Rencana Data Prioritas Jangka Menengah Tahun 2025-2029" description="Berisi daftar data prioritas jangka menengah yang digunakan dalam sistem.">
           <DataPrioritasClient data={mappedData} />
         </ComponentCard>
       </div>

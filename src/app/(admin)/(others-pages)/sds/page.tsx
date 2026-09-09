@@ -44,7 +44,7 @@ export default async function SdsPage() {
       <PageBreadcrumb pageTitle="Standar Data Statistik" />
 
       <div className="space-y-6">
-        <ComponentCard title="Standar Data Statistik">
+        <ComponentCard title="Dasar Hukum : Keputusan Kepala BPS Nomor 996 Tahun 2025 tentang Standar Data Statistik Nasional">
           <SdsClient data={mappedData} />
         </ComponentCard>
       </div>

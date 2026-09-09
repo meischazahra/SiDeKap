@@ -44,7 +44,7 @@ console.log("DSSD PERTAMA:", dssd[0]);
       item.produsen_data ?? "-",
 
     // nama di frontend jadi kategori
-    kategori:
+    urusan:
       item.sheet_asal ?? "-",
   }));
 
@@ -58,7 +58,7 @@ console.log("DSSD PERTAMA:", dssd[0]);
 
       <div className="space-y-6">
 
-        <ComponentCard title="Data Statistik Sektoral Daerah">
+        <ComponentCard title="Dasar Hukum : Permendagri Nomor 86 Tahun 2017">
 
           <KodeDssdClient
             data={mappedData}
