@@ -16,7 +16,7 @@ const sumberData = [
   {
     title: "Kode Referensi",
     description: "Indikator pembangunan",
-    href: "https://data.go.id/",
+    href: "https://data.go.id/reference",
   },
   {
     title: "Data Prioritas",
